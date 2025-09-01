@@ -1,8 +1,8 @@
-const backendURL = "https://backi-2.onrender.com"; // Replace with your Render link
+const backendURL = "https://backi-2.onrender.com"; // Replace with your Render backend link
 
 // Search Recipes
 document.getElementById("getRecipesBtn").addEventListener("click", async () => {
-    const ingredients = document.getElementById("ingredients").value;
+    const ingredients = document.getElementById("ingredients").value.trim();
     if (!ingredients) return alert("Please enter ingredients!");
 
     try {
@@ -11,11 +11,22 @@ document.getElementById("getRecipesBtn").addEventListener("click", async () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ingredients })
         });
+
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
         const data = await res.json();
+
+        // Check if recipes exist
+        if (!data.recipes) {
+            alert("No recipes found!");
+            return;
+        }
+
         displayRecipes(data.recipes);
+
     } catch (err) {
-        console.error(err);
-        alert("Error fetching recipes!");
+        console.error("Error fetching recipes:", err);
+        alert("Error fetching recipes! Please check your backend or CORS settings.");
     }
 });
 
@@ -33,11 +44,20 @@ document.getElementById("imageForm").addEventListener("submit", async (e) => {
             method: "POST",
             body: formData
         });
+
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
         const data = await res.json();
+
+        if (!data.ingredients) {
+            alert("No ingredients detected!");
+            return;
+        }
+
         document.getElementById("imageResult").innerHTML = `<p><strong>Detected Ingredients:</strong> ${data.ingredients.join(", ")}</p>`;
     } catch (err) {
-        console.error(err);
-        alert("Error detecting ingredients!");
+        console.error("Error detecting ingredients:", err);
+        alert("Error detecting ingredients! Check your backend or CORS.");
     }
 });
 
@@ -55,14 +75,18 @@ function displayRecipes(recipes) {
         const div = document.createElement("div");
         div.className = "recipe-card";
         div.innerHTML = `
-            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="${r.title}">
+            <img src="${r.image || 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092'}" alt="${r.title}">
             <div class="card-content">
                 <h3>${r.title}</h3>
-                <p>${r.description}</p>
-                <button>Save Recipe</button>
+                <p>${r.description || 'No description available.'}</p>
+                <button onclick="saveRecipe('${r.title}')">Save Recipe</button>
             </div>
         `;
         container.appendChild(div);
     });
 }
 
+// Optional: Save recipe handler
+function saveRecipe(title) {
+    alert(`Recipe "${title}" saved!`);
+}
