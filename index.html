@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Recipe Recommender</title>
-  <link rel="stylesheet" href="./style.css">
-  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Recommender Pro</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER / NAVBAR -->
   <header>
-    <h1>🍳 Recipe Recommender</h1>
+    <div class="logo">
+      <h1>🍳 RecipePro</h1>
+    </div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Saved Recipes</a>
-      <a href="#">About</a>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Saved Recipes</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
     </nav>
   </header>
 
-  <!-- FORM -->
-  <section class="form-container">
-    <h2>Find Recipes with Your Ingredients</h2>
-    <p>Enter a list of ingredients below (e.g., <em>chicken, tomatoes, garlic</em>) and we'll suggest delicious recipes!</p>
-    <input id="ingredients" placeholder="Enter ingredients">
-    <button onclick="getRecipes()">Get Recipes</button>
-   <h2>Upload Food Image</h2>
-   <form id="imageForm" enctype="multipart/form-data">
-    <input type="file" id="imageInput" name="image" accept="image/*">
-    <button type="submit">Detect Ingredients</button>
-  </form>
-</section>
-
-<div id="imageResult"></div>
-
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Discover Delicious Recipes</h2>
+      <p>Enter your ingredients and get the best recipe suggestions instantly!</p>
+      <div class="search-bar">
+        <input id="ingredients" placeholder="e.g., chicken, tomatoes, garlic">
+        <button id="getRecipesBtn">Find Recipes</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Delicious Food">
+    </div>
   </section>
 
-  <!-- RESULTS -->
-  <section>
-    <h2 style="margin-top:30px;">Recommended Recipes</h2>
-    <div id="recipes"></div>
+  <!-- IMAGE UPLOAD -->
+  <section class="upload-section">
+    <h2>Upload Food Image</h2>
+    <form id="imageForm" enctype="multipart/form-data">
+      <input type="file" id="imageInput" name="image" accept="image/*">
+      <button type="submit">Detect Ingredients</button>
+    </form>
+    <div id="imageResult"></div>
+  </section>
+
+  <!-- RECIPE RESULTS -->
+  <section class="recipes-section">
+    <h2>Recommended Recipes</h2>
+    <div id="recipes" class="recipes-container"></div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 Recipe Recommender | Built with Flask + MySQL + OpenAI</p>
+    <div class="footer-content">
+      <p>© 2025 RecipePro | Built with Flask + MySQL + OpenAI</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
   </footer>
 
- <script>./script.js</script>
+<script src="script.js"></script>
 </body>
 </html>
