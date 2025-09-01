@@ -1,4 +1,4 @@
-const backendURL = "https://your-render-app.onrender.com"; // Replace with your Render link
+const backendURL = "https://backi-2.onrender.com"; // Replace with your Render link
 
 // Search Recipes
 document.getElementById("getRecipesBtn").addEventListener("click", async () => {
